@@ -1,0 +1,20 @@
+<% if flash[:notice] %>
+    <%= flash[:notice] %>
+<% end %>
+
+<% @tweet.each do |tweet| %>
+<p><%= tweet.message %>
+<% if session[:login_uid] %>
+<%= link_to '削除', "/tweets/#{tweet.id}",method: :delete %>
+<%= link_to 'いいね', likes_path(tweet_id: tweet.id), method: :post %>
+<%= link_to 'いいね削除', like_path(tweet), method: :delete %>
+</p><% end %>
+<% end %>
+
+<% if session[:login_uid] %>
+    <p><%= link_to 'ツイートする', '/tweets/new' %>：
+    <%= link_to 'ログアウト',top_logout_path %>：
+    <%= link_to 'ユーザ一覧','/users/' %></p>
+<% else %>
+    <p><%= link_to 'ログイン', '/top/main' %></p>
+<% end %>

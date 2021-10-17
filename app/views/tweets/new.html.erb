@@ -1,0 +1,14 @@
+<% if @tweet.errors.present? %>
+<ul>
+<% @tweet.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+<% end %>
+
+<%= form_for @tweet , url: {action: :create} do |f| %>
+<p><%= f.label :message, 'メッセージを入力してください。' %></p>
+<%= f.text_field :message %>
+
+<%= f.submit 'つぶやく' %>
+<% end %>
